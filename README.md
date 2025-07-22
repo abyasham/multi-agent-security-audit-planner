@@ -18,15 +18,14 @@ This tool transforms the traditionally manual and time-intensive process of IoT 
 
 ## 🏗️ How It Works
 
-The system employs four specialized AI agents working in sequence:
+The system employs three specialized AI agents working in sequence:
 
 ```mermaid
 graph LR
     A[Risk Register] --> B[Risk Ingestor Agent]
     B --> C[Control Mapper Agent]
     C --> D[Criteria Generator Agent]
-    D --> E[JSON Formatter Agent]
-    E --> F[Audit Plan]
+    D --> E[Audit Plan]
     
     G[Security Standards] --> C
     H[Organizational Policies] --> C
@@ -35,13 +34,12 @@ graph LR
 1. **Risk Ingestor Agent**: Analyzes and prioritizes risks from your risk register
 2. **Control Mapper Agent**: Maps risks to relevant security controls from standards and policies
 3. **Criteria Generator Agent**: Creates detailed, testable audit criteria
-4. **JSON Formatter Agent**: Formats output into structured, professional audit plans
 
 ## 📋 Prerequisites
 
 ### Required API Keys
 - **OpenAI API Key**: For the AI agents
-- **Google API Key**: For evaluation and quality assessment
+- **Google API Key**: For evaluation and quality assessment (RAGAS)
 
 ### Input Data Requirements
 Your organization needs to provide:
@@ -188,21 +186,6 @@ Adjust the risk scoring algorithm in the `RiskIngestorAgent` class to match your
 ## 📚 Research Background
 
 This tool is based on research into multi-agent AI systems for automated security audit planning. The methodology and evaluation results are detailed in the accompanying research paper: [`Multi_Agent_Automated_IoT_audit_planning.pdf`](paper/Multi_Agent_Automated__IoT_audit_planning.pdf).
-
-## 🤝 Contributing
-
-We welcome contributions from security professionals and researchers. Please see our contribution guidelines for more information.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-For questions or issues:
-1. Check the troubleshooting section in the notebook
-2. Review the sample dataset for proper formatting
-3. Open an issue on GitHub with your specific use case
 
 ## 🔗 Related Resources
 
