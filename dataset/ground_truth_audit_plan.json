@@ -1,0 +1,493 @@
+{
+  "auditPlan": {
+    "metadata": {
+      "scope": "IoT Security Compliance Audit - Smart Office Environment",
+      "framework": "ETSI EN 303 645 & Internal Policy ABC",
+      "totalCriteria": 30,
+      "riskCoverage": "100%",
+      "lastUpdated": "2024-12-20"
+    },
+    "auditCriteria": [
+      {
+        "criterionId": "GT-001",
+        "priority": "High",
+        "description": "For a sample of newly installed IoT security cameras, verify that the default administrative password has been changed from the manufacturer's setting and meets the complexity requirements of the corporate password policy. Test authentication mechanisms and verify password change logs are maintained.",
+        "testingGuidance": "1. Select representative sample of 20% of security cameras installed in last 12 months. 2. Attempt login with known default passwords. 3. Verify current passwords meet complexity policy. 4. Review change logs and installation documentation.",
+        "sourceRisk": {
+          "riskId": "R-002",
+          "description": "Default, hardcoded passwords on newly installed IoT security cameras provide a simple entry point for an attacker to view live security feeds.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Provision 1",
+          "title": "No universal default passwords",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-002", 
+        "priority": "High",
+        "description": "Review the firewall rulebase to confirm that a default-deny rule exists between the IoT VLAN and the corporate VLAN, and inspect exception rules for proper documentation and business justification. Verify network segmentation effectiveness through penetration testing.",
+        "testingGuidance": "1. Export and analyze firewall configurations. 2. Verify default-deny rules between VLANs. 3. Review exception documentation and approvals. 4. Perform network connectivity testing to validate segmentation.",
+        "sourceRisk": {
+          "riskId": "R-001", 
+          "description": "Unauthorized access to the HVAC control system allows an attacker to manipulate building temperature, causing disruption and potential equipment damage.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-06",
+          "title": "Network Segmentation and Isolation", 
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-003",
+        "priority": "High", 
+        "description": "Perform network packet capture and analysis to verify that data transmitted from room occupancy sensors is encrypted using TLS 1.2 or higher. Validate certificate authenticity and encryption strength.",
+        "testingGuidance": "1. Deploy network monitoring on sensor VLANs. 2. Capture traffic samples from occupancy sensors. 3. Analyze encryption protocols and cipher suites. 4. Verify certificate validity and CA trust chains.",
+        "sourceRisk": {
+          "riskId": "R-003",
+          "description": "Sensitive data from room occupancy sensors is transmitted unencrypted over the guest Wi-Fi network, making it vulnerable to interception.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Provision 5",
+          "title": "Communicate securely",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-004",
+        "priority": "Medium",
+        "description": "Review the latest vulnerability scan report for smart lighting controllers and verify that remediation plans exist for critical and high-risk vulnerabilities. Confirm patch management procedures are followed.",
+        "testingGuidance": "1. Obtain most recent vulnerability scan reports. 2. Identify critical/high vulnerabilities on lighting systems. 3. Review remediation timelines and completion status. 4. Verify patch testing procedures.",
+        "sourceRisk": {
+          "riskId": "R-005",
+          "description": "A known vulnerability in the smart lighting controller's firmware is not patched, allowing an attacker to cause a denial-of-service attack, disabling all office lights.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Policy-15",
+          "title": "Vulnerability Assessment and Management",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-005",
+        "priority": "Critical",
+        "description": "Test smart door lock authentication mechanisms including biometric calibration accuracy, backup authentication methods, and access logging. Verify fail-safe procedures during system failures.",
+        "testingGuidance": "1. Test biometric authentication accuracy with diverse user samples. 2. Verify backup authentication methods function properly. 3. Review access logs for completeness and integrity. 4. Test fail-safe mechanisms during power/network failures.",
+        "sourceRisk": {
+          "riskId": "R-006",
+          "description": "Smart door locks fail to properly authenticate users due to weak biometric calibration, allowing unauthorized physical access to sensitive areas.",
+          "riskLevel": "Critical"
+        },
+        "sourceControl": {
+          "controlId": "Provision 14",
+          "title": "Strong user authentication",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-006",
+        "priority": "High",
+        "description": "Review IoT environmental sensor data collection practices to verify GDPR compliance including user consent mechanisms, privacy notices, data minimization, and user rights implementation.",
+        "testingGuidance": "1. Review data collection and consent procedures. 2. Verify privacy notices are clear and accessible. 3. Test data subject rights implementation (access, deletion, portability). 4. Confirm data minimization principles are applied.",
+        "sourceRisk": {
+          "riskId": "R-007",
+          "description": "IoT environmental sensors collect and store personal data without proper user consent or privacy notice compliance, violating GDPR requirements.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Provision 24",
+          "title": "Consent management",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-007",
+        "priority": "Medium",
+        "description": "Examine conference room booking tablet configurations and source code to identify any hardcoded credentials, API keys, or sensitive parameters. Verify secure credential management practices.",
+        "testingGuidance": "1. Review application configurations and source code. 2. Scan for hardcoded credentials using automated tools. 3. Verify API key rotation and access controls. 4. Test credential vault integration.",
+        "sourceRisk": {
+          "riskId": "R-008",
+          "description": "Conference room booking tablets contain hardcoded API keys that could provide unauthorized access to calendar and meeting data.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Provision 4",
+          "title": "Securely store sensitive security parameters",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-008",
+        "priority": "High",
+        "description": "Verify smart printer firmware integrity mechanisms including secure boot processes, cryptographic signature verification, and firmware update authentication procedures.",
+        "testingGuidance": "1. Review firmware update documentation and procedures. 2. Verify secure boot implementation and integrity checks. 3. Test firmware signature validation. 4. Attempt unauthorized firmware modification.",
+        "sourceRisk": {
+          "riskId": "R-009",
+          "description": "Smart printers with network connectivity lack proper firmware integrity checks, making them vulnerable to malicious firmware installation.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Provision 7",
+          "title": "Ensure software integrity and authenticity",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-009",
+        "priority": "Critical",
+        "description": "Assess voice-activated assistant data handling including encryption of recorded conversations, access controls on stored voice data, and compliance with privacy regulations.",
+        "testingGuidance": "1. Review voice data encryption both in transit and at rest. 2. Test access controls on voice recordings. 3. Verify data retention and deletion policies. 4. Confirm privacy notice adequacy and user consent.",
+        "sourceRisk": {
+          "riskId": "R-010",
+          "description": "Voice-activated assistants in meeting rooms continuously record conversations without proper data encryption or access controls.",
+          "riskLevel": "Critical"
+        },
+        "sourceControl": {
+          "controlId": "Provision 8",
+          "title": "Ensure that personal data is secure",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-010",
+        "priority": "Critical",
+        "description": "Test fire safety IoT sensor resilience during network outages including local processing capabilities, backup communication methods, and failover procedures to ensure continuous safety monitoring.",
+        "testingGuidance": "1. Simulate network outages and test sensor functionality. 2. Verify local processing and decision-making capabilities. 3. Test backup communication channels (cellular, satellite). 4. Confirm integration with emergency response systems.",
+        "sourceRisk": {
+          "riskId": "R-011",
+          "description": "Fire safety IoT sensors fail to maintain availability during network outages, potentially compromising emergency response capabilities.",
+          "riskLevel": "Critical"
+        },
+        "sourceControl": {
+          "controlId": "Provision 9",
+          "title": "Make systems resilient to outages",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-011",
+        "priority": "Medium",
+        "description": "Verify digital signage display access controls including authentication mechanisms, authorization levels, content management security, and malware protection measures.",
+        "testingGuidance": "1. Test authentication mechanisms and password policies. 2. Verify role-based access controls. 3. Review content upload and approval processes. 4. Scan for malware and security vulnerabilities.",
+        "sourceRisk": {
+          "riskId": "R-012",
+          "description": "Digital signage displays are accessible via default administrator accounts, allowing unauthorized content manipulation and potential malware distribution.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Policy-09",
+          "title": "Default Credential Management",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-012",
+        "priority": "High",
+        "description": "Assess smart elevator control system security including remote access authentication, command authorization, emergency override procedures, and safety system integration.",
+        "testingGuidance": "1. Test remote access authentication mechanisms. 2. Verify command authorization and logging. 3. Review emergency override and safety procedures. 4. Test integration with building safety systems.",
+        "sourceRisk": {
+          "riskId": "R-013",
+          "description": "Smart elevator controls can be accessed remotely without proper authentication, allowing attackers to disable or manipulate elevator operations.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-10",
+          "title": "Administrative Access Control",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-013",
+        "priority": "High",
+        "description": "Verify IoT asset tracking device data transmission security including encryption protocols, location data anonymization, and data retention policies.",
+        "testingGuidance": "1. Capture and analyze location data transmissions. 2. Verify encryption implementation and strength. 3. Review data anonymization techniques. 4. Confirm data retention and deletion procedures.",
+        "sourceRisk": {
+          "riskId": "R-014",
+          "description": "IoT asset tracking devices transmit location data without encryption, potentially exposing sensitive business operations and personnel movements.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-12",
+          "title": "Data Encryption and Protection",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-014",
+        "priority": "Critical",
+        "description": "Review building automation system user access controls including role-based permissions, segregation of duties, privileged access management, and critical function authorization.",
+        "testingGuidance": "1. Review user roles and permission matrices. 2. Test segregation of duties for critical operations. 3. Verify privileged access management implementation. 4. Test authorization workflows for critical building functions.",
+        "sourceRisk": {
+          "riskId": "R-015",
+          "description": "Building automation system lacks proper user access controls, allowing any authenticated user to modify critical building operations.",
+          "riskLevel": "Critical"
+        },
+        "sourceControl": {
+          "controlId": "Policy-11",
+          "title": "User Access Management",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-015",
+        "priority": "High",
+        "description": "Assess smart visitor management kiosk data protection including encryption of stored personal data, access controls, data retention compliance, and secure disposal procedures.",
+        "testingGuidance": "1. Review data storage encryption implementation. 2. Test access controls on visitor data. 3. Verify compliance with data retention policies. 4. Confirm secure data disposal procedures.",
+        "sourceRisk": {
+          "riskId": "R-016",
+          "description": "Smart visitor management kiosks store visitor personal data in plaintext, violating data protection requirements and privacy regulations.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-13",
+          "title": "Data Classification and Handling",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-016",
+        "priority": "High",
+        "description": "Verify wireless IoT device encryption protocols by scanning network configurations and testing communication security to ensure WPA3 or equivalent strong encryption is implemented.",
+        "testingGuidance": "1. Scan wireless networks for encryption protocols. 2. Test wireless communication security. 3. Verify WPA3 implementation and configuration. 4. Assess wireless key management procedures.",
+        "sourceRisk": {
+          "riskId": "R-017",
+          "description": "Wireless IoT devices use deprecated WEP encryption, making network communications easily interceptible by attackers.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Provision 18",
+          "title": "Secure network protocols",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-017",
+        "priority": "Medium",
+        "description": "Review temperature and humidity sensor update mechanisms including automatic update capabilities, manual update procedures, and compensating controls for devices without update functionality.",
+        "testingGuidance": "1. Inventory sensors by update capability. 2. Test automatic update mechanisms where available. 3. Review manual update procedures and schedules. 4. Assess compensating controls for non-updatable devices.",
+        "sourceRisk": {
+          "riskId": "R-018",
+          "description": "Temperature and humidity sensors lack software update mechanisms, leaving permanent vulnerabilities that cannot be remediated.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Policy-04",
+          "title": "Firmware and Software Update Management",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-018",
+        "priority": "Critical",
+        "description": "Assess smart vending machine payment processing security including PCI DSS compliance, card data encryption, secure key management, and transaction logging.",
+        "testingGuidance": "1. Review PCI DSS compliance documentation. 2. Test payment card data encryption. 3. Verify secure key management implementation. 4. Review transaction logging and monitoring.",
+        "sourceRisk": {
+          "riskId": "R-019",
+          "description": "Smart vending machines store payment card data without PCI DSS compliant encryption, risking financial data breaches.",
+          "riskLevel": "Critical"
+        },
+        "sourceControl": {
+          "controlId": "Policy-20",
+          "title": "Regulatory Compliance",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-019",
+        "priority": "Medium",
+        "description": "Review IoT network infrastructure logging and monitoring capabilities including log collection, SIEM integration, incident detection, and compliance reporting.",
+        "testingGuidance": "1. Review logging configuration across IoT infrastructure. 2. Test SIEM integration and log parsing. 3. Verify incident detection and alerting mechanisms. 4. Assess compliance reporting capabilities.",
+        "sourceRisk": {
+          "riskId": "R-020",
+          "description": "IoT network infrastructure lacks comprehensive logging and monitoring, preventing detection of security incidents and compliance violations.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Provision 26",
+          "title": "Security logging and monitoring",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-020",
+        "priority": "High",
+        "description": "Assess third-party IoT service provider access controls including vendor security assessments, contract security requirements, access monitoring, and periodic reviews.",
+        "testingGuidance": "1. Review vendor security assessment documentation. 2. Verify contract security requirements and SLAs. 3. Test vendor access monitoring and logging. 4. Confirm periodic security review procedures.",
+        "sourceRisk": {
+          "riskId": "R-021",
+          "description": "Third-party IoT service providers have excessive access privileges without proper vendor management or security assessments.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-21",
+          "title": "Third-Party and Vendor Management",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-021", 
+        "priority": "Medium",
+        "description": "Test smart building system backup power and fail-safe mechanisms including UPS functionality, emergency procedures, and security system continuity during power failures.",
+        "testingGuidance": "1. Test UPS and backup power systems. 2. Simulate power outages and verify fail-safe operations. 3. Review emergency response procedures. 4. Confirm security system continuity during outages.",
+        "sourceRisk": {
+          "riskId": "R-022",
+          "description": "Smart building systems lack proper backup power and fail-safe mechanisms, causing security system failures during power outages.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Policy-19",
+          "title": "Business Continuity and Disaster Recovery",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-022",
+        "priority": "Medium", 
+        "description": "Review IoT device certificate management including automated renewal processes, expiration monitoring, and procedures for certificate replacement without service disruption.",
+        "testingGuidance": "1. Review certificate inventory and expiration dates. 2. Test automated renewal mechanisms. 3. Verify certificate monitoring and alerting. 4. Test certificate replacement procedures.",
+        "sourceRisk": {
+          "riskId": "R-023",
+          "description": "IoT device certificates expire without automated renewal processes, causing service disruptions and potential security gaps.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Provision 19",
+          "title": "Certificate management",
+          "source": "iot_security_standard.txt"
+        }
+      },
+      {
+        "criterionId": "GT-023",
+        "priority": "High",
+        "description": "Assess conference room display endpoint protection including antimalware software, security patch management, network isolation, and monitoring for lateral movement indicators.",
+        "testingGuidance": "1. Verify endpoint protection software installation and configuration. 2. Review patch management procedures and current status. 3. Test network isolation and segmentation. 4. Monitor for lateral movement indicators.",
+        "sourceRisk": {
+          "riskId": "R-024",
+          "description": "Conference room displays connected to corporate networks lack endpoint protection, making them potential pivot points for lateral movement.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-07",
+          "title": "Network Access Control and Monitoring",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-024",
+        "priority": "Medium",
+        "description": "Review smart parking sensor cloud data handling including data residency requirements, sovereignty compliance, encryption in transit and at rest, and vendor data processing agreements.",
+        "testingGuidance": "1. Review cloud service configurations and data location. 2. Verify compliance with data residency requirements. 3. Test encryption implementation for data in transit and at rest. 4. Review vendor data processing agreements.",
+        "sourceRisk": {
+          "riskId": "R-025",
+          "description": "Smart parking sensors transmit data over public cloud services without proper data residency and sovereignty controls.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Policy-21",
+          "title": "Third-Party and Vendor Management", 
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-025",
+        "priority": "High",
+        "description": "Verify IoT device decommissioning procedures including data wiping verification, certificate revocation, inventory updates, and secure physical disposal processes.",
+        "testingGuidance": "1. Review decommissioning procedures and documentation. 2. Test data wiping and verification processes. 3. Verify certificate revocation procedures. 4. Confirm inventory update and disposal tracking.",
+        "sourceRisk": {
+          "riskId": "R-026",
+          "description": "IoT devices lack proper decommissioning procedures, leaving sensitive data accessible after device retirement or replacement.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-05",
+          "title": "End-of-Life and Decommissioning",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-026",
+        "priority": "High",
+        "description": "Assess BYOD IoT device security controls including device registration, security policy compliance, network access restrictions, and monitoring capabilities.",
+        "testingGuidance": "1. Review BYOD device registration processes. 2. Verify security policy compliance enforcement. 3. Test network access restrictions and segmentation. 4. Assess monitoring and detection capabilities.",
+        "sourceRisk": {
+          "riskId": "R-027",
+          "description": "BYOD IoT devices connecting to corporate networks bypass security controls and device management policies.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-01",
+          "title": "IoT Device Onboarding and Registration",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-027",
+        "priority": "Low",
+        "description": "Test smart water leak detection sensor tamper detection including physical security features, tamper alerting mechanisms, and integrity monitoring capabilities.",
+        "testingGuidance": "1. Test physical tamper detection features. 2. Verify tamper alerting and notification systems. 3. Assess integrity monitoring capabilities. 4. Review installation security measures.",
+        "sourceRisk": {
+          "riskId": "R-028",
+          "description": "Smart water leak detection sensors lack tamper detection capabilities, allowing physical compromise without security alerts.",
+          "riskLevel": "Low"
+        },
+        "sourceControl": {
+          "controlId": "Policy-25",
+          "title": "Physical Device Security",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-028",
+        "priority": "Medium",
+        "description": "Review building energy management system data loss prevention including sensitive data identification, DLP policy enforcement, data classification, and exfiltration monitoring.",
+        "testingGuidance": "1. Review data classification and identification processes. 2. Test DLP policy enforcement mechanisms. 3. Verify data exfiltration monitoring. 4. Assess data handling and retention procedures.",
+        "sourceRisk": {
+          "riskId": "R-029",
+          "description": "Building energy management systems process sensitive operational data without proper data loss prevention controls.",
+          "riskLevel": "Medium"
+        },
+        "sourceControl": {
+          "controlId": "Policy-13",
+          "title": "Data Classification and Handling",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-029",
+        "priority": "High",
+        "description": "Assess IoT device inventory completeness including discovery procedures, asset database accuracy, security assessment coverage, and compliance verification processes.",
+        "testingGuidance": "1. Perform network discovery and compare with inventory. 2. Verify asset database accuracy and completeness. 3. Review security assessment coverage for all devices. 4. Test compliance verification procedures.",
+        "sourceRisk": {
+          "riskId": "R-030",
+          "description": "IoT device inventory management is incomplete, preventing accurate security assessment and compliance verification of all connected devices.",
+          "riskLevel": "High"
+        },
+        "sourceControl": {
+          "controlId": "Policy-02",
+          "title": "IoT Device Inventory and Classification",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      },
+      {
+        "criterionId": "GT-030",
+        "priority": "Medium",
+        "description": "Review network port security controls including MAC address filtering, network access control (NAC), port monitoring, and unauthorized device detection capabilities.",
+        "testingGuidance": "1. Test MAC address filtering effectiveness. 2. Verify NAC implementation and policies. 3. Review port monitoring and alerting. 4. Test unauthorized device detection and response.",
+        "sourceRisk": {
+          "riskId": "R-004",
+          "description": "A third-party cleaning crew connects a compromised device to an active, unsecured network port in a conference room, gaining access to the corporate network.",
+          "riskLevel": "Low"
+        },
+        "sourceControl": {
+          "controlId": "Policy-07",
+          "title": "Network Access Control and Monitoring",
+          "source": "internal_iot_policy_abc.txt"
+        }
+      }
+    ]
+  }
+}
