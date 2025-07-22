@@ -1,4 +1,4 @@
-# Multi-Agent AI for IoT Audit Planning
+# Multi-Agent AI for IoT Security Audit Planning
 
 🔒 **Automated IoT Security Audit Planning using Multi-Agent AI Systems**
 
